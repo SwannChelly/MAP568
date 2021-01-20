@@ -1,6 +1,9 @@
 #### Constant file containing what we need for the project ####
 import numpy as np 
 
+
+np.random.seed(1234)
+
 # Date 
 start_time  = '2020-01-25'
 middle_time = '2020-02-04'
@@ -100,4 +103,3 @@ tau = tau_0*np.exp(-mu*np.max(t-N,0))
 #     D:8,
 #     D_R:9
 # }
-
