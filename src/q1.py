@@ -6,17 +6,16 @@ import matplotlib.pyplot as plt
 
 # First define the matrix : 
 
-#np.random.seed(1234)
+# np.random.seed(1234)
 
 
-T_MAX=100
-Res = Resolution_Systeme(T_MAX, deltaT,S_0)
+Res = Resolution_Systeme(set_size, deltaT,S_0)
 #print(Res[1])  ##### nombre d'infectés
 
 
 def pic_epidemie(L):
     #### L une liste 
-    maximum = max(L)
+    maximum = np.max(L)
     N_jours_pic = L.index(maximum)
     return (maximum, N_jours_pic)
 
