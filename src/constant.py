@@ -6,7 +6,7 @@ import numpy as np
 
 # Date 
 start_time  = '2020-01-25'
-middle_time = '2020-02-04'
+middle_time = '2020-02-24'
 end_time    = '2020-03-15'
 
 N_VARIABLE  = 10
@@ -41,7 +41,7 @@ def init_constant():
         cst[key] = np.random.uniform(value[0],value[1])
 
     
-    cst['t_0']      = init_random_date(start_time,end_time)
+    cst['t_0']      = init_random_date(start_time,middle_time)
     cst['N']        = init_random_date(middle_time,end_time)
     cst['N_I']      = np.random.randint(8,12)
     cst['N_H']      = np.random.randint(15,25)
@@ -71,7 +71,7 @@ def init_random_date(start_time,end_time,integer = True,first_date ='2020-01-25'
     bimonthly_days = np.arange(0, (end_time-start_time))
     random_date = start_time + np.random.choice(bimonthly_days)
     if integer : 
-        return (random_date-start_time).astype(int)
+        return (random_date-first_date).astype(int)
     return random_date + (start_time-first_date).astype(int)
 
 
