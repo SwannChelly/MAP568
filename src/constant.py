@@ -6,11 +6,11 @@ import numpy as np
 
 # Date 
 start_time  = '2020-01-25'
-middle_time = '2020-02-04'
+middle_time = '2020-02-24'
 end_time    = '2020-03-15'
 
 N_VARIABLE  = 10
-deltaT      = 1
+deltaT      = 0.1
 T_MAX       = 100
 set_size    = int(T_MAX/deltaT)
 
