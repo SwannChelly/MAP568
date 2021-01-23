@@ -9,9 +9,10 @@ import matplotlib.pyplot as plt
 # np.random.seed(1234)
 
 
-Res = Resolution_Systeme(set_size, deltaT,S_0)
+#Res = Resolution_Systeme(set_size, deltaT,S_0)
 #print(Res[1])  ##### nombre d'infectés
 
+"""
 
 def pic_epidemie(L):
     #### L une liste 
@@ -36,8 +37,10 @@ MAX, N_MAX = Monte_Carlo(10)
 plt.plot(MAX, color = 'r')
 plt.plot(N_MAX)
 plt.show()
+"""
 
-
-    
+print(init_constant())
+#print(cst['t_0'])
+#print(cst['N'])
     
     
