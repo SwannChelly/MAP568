@@ -96,6 +96,9 @@ syst_CI=array([cst['S_0'],cst['I_moins_0'],0,0,0,0,0,0,0,0])
 Sols=odeint(equa_diff,syst_CI,t)
 plt.plot(Sols[:,1])
  
-#MAX, N_MAX = Monte_Carlo(100)
-#plt.hist(MAX, bins = 30)    
+MAX, N_MAX = Monte_Carlo(100)
+print(N_MAX)
+print(MAX)
+plt.hist(MAX, bins = 30)    
+#plt.show()
     

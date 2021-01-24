@@ -5,7 +5,6 @@ from constant import *
 
 
 from scipy import *
-from pylab import *
 
 
 
