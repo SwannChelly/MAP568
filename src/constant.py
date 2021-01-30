@@ -59,7 +59,7 @@ def init_constant():
     cst['gamma_UR']    = (1-cst['p_UD'])/cst['N_U']
     cst['tau_0']       = cst['R_0']*(cst['lambda_1']+cst['gamma_IR'] + cst['gamma_IH'] + cst['gamma_IU'])/cst['S_0']
     cst['t']           = np.array([cst['t_0']+i*deltaT for i in range(set_size)])
-    cst['tau']         = [cst['tau_0']*np.exp(-cst['mu']*np.max(cst['t'][i]-cst['N'],0)) for i in range(set_size)]
+    cst['tau']         = [cst['tau_0']*np.exp(-cst['mu']*max(cst['t'][i]-cst['N'],0)) for i in range(set_size)]
     
 
     return cst
