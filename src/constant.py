@@ -49,9 +49,9 @@ def init_constant():
     cst['I_moins_0']= np.random.randint(1,100)
     cst['lambda_2'] = 0
 
-    cst['gamma_IR']    = (cst['p_a'] + (1-(cst['p_a'])*(1-cst['p_IH']-cst['p_IU'])))/cst['N_I']
-    cst['gamma_IH']    = (1-(cst['p_a'])*cst['p_IH'])/cst['N_I']
-    cst['gamma_IU']    = (1-(cst['p_a'])*cst['p_IU'])/cst['N_I']
+    cst['gamma_IR']    = (cst['p_a'] + (1-cst['p_a'])*(1-cst['p_IH']-cst['p_IU']))/cst['N_I']
+    cst['gamma_IH']    = (1-cst['p_a'])*cst['p_IH']/cst['N_I']
+    cst['gamma_IU']    = (1-cst['p_a'])*cst['p_IU']/cst['N_I']
     cst['gamma_HD']    = cst['p_HD']/cst['N_H']
     cst['gamma_HU']    = cst['p_HU']/cst['N_H']
     cst['gamma_HR']    = (1-cst['p_HD']-cst['p_HU'])/cst['N_H']

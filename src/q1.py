@@ -41,7 +41,7 @@ def equa_diff(syst,temps):
     #elif temps > 100.:
     #    temps = 100.
     #i = time.index(temps)
-    tau = cst['tau_0']*np.exp(-cst['mu']*np.max(temps-(cst['N']-cst['t_0']),0))
+    tau = cst['tau_0']*np.exp(-cst['mu']*max(temps-(cst['N']-cst['t_0']),0))
     S = syst[0] 
     I_moins = syst[1] 
     I_plus = syst[2] 
@@ -94,11 +94,12 @@ def Monte_Carlo(M):
 cst = init_constant()
 syst_CI=array([cst['S_0'],cst['I_moins_0'],0,0,0,0,0,0,0,0])
 Sols=odeint(equa_diff,syst_CI,t)
-plt.plot(Sols[:,1])
+#plt.plot(Sols[:,1])
  
-MAX, N_MAX = Monte_Carlo(100)
+
+MAX, N_MAX = Monte_Carlo(500)
 print(N_MAX)
 print(MAX)
-plt.hist(MAX, bins = 30)    
+plt.hist(MAX, bins = 100)    
 #plt.show()
     
