@@ -1,4 +1,4 @@
-#### Constant file containing what we need for the project ####
+# Constant file containing what we need for the project ####
 import numpy as np 
 
 
@@ -9,15 +9,13 @@ start_time  = '2020-01-25'
 middle_time = '2020-02-24'
 end_time    = '2020-03-15'
 
-N_VARIABLE  = 10
-deltaT      = 0.1
-T_MAX       = 100
-set_size    = int(T_MAX/deltaT)
 
 
+global_constants = {'deltaT':0.1,
+'T_MAX': 100, 
+'S_0': 67*10**6}
 
-
-cst = {}
+global_constants['set_size'] = int(global_constants['T_MAX']/global_constants['deltaT'])
 
 
 cst_range = {
@@ -32,37 +30,10 @@ cst_range = {
     'lambda_1'  : [10**(-4),10**(-3)]
 }
 
+bound = ((0.4,0.9),(0.05,0.2),(0.01,0.04),(0.1,0.2),(0.1,0.2),(0.2,0.4),(2.9,3.4),(0.01,0.08),(10**(-4),10**(-3)),(0,30),(30,50),
+(8,12),(15,25),(10,20),(1,100))
 
-def init_constant():
 
-    cst['S_0'] = 67*10**6
-
-    for key,value in cst_range.items() : 
-        cst[key] = np.random.uniform(value[0],value[1])
-
-    
-    cst['t_0']      = init_random_date(start_time,middle_time)
-    cst['N']        = init_random_date(middle_time,end_time)
-    cst['N_I']      = np.random.randint(8,12)
-    cst['N_H']      = np.random.randint(15,25)
-    cst['N_U']      = np.random.randint(10,20)
-    cst['I_moins_0']= np.random.randint(1,100)
-    cst['lambda_2'] = 0
-
-    cst['gamma_IR']    = (cst['p_a'] + (1-cst['p_a'])*(1-cst['p_IH']-cst['p_IU']))/cst['N_I']
-    cst['gamma_IH']    = (1-cst['p_a'])*cst['p_IH']/cst['N_I']
-    cst['gamma_IU']    = (1-cst['p_a'])*cst['p_IU']/cst['N_I']
-    cst['gamma_HD']    = cst['p_HD']/cst['N_H']
-    cst['gamma_HU']    = cst['p_HU']/cst['N_H']
-    cst['gamma_HR']    = (1-cst['p_HD']-cst['p_HU'])/cst['N_H']
-    cst['gamma_UD']    = cst['p_UD']/cst['N_U']
-    cst['gamma_UR']    = (1-cst['p_UD'])/cst['N_U']
-    cst['tau_0']       = cst['R_0']*(cst['lambda_1']+cst['gamma_IR'] + cst['gamma_IH'] + cst['gamma_IU'])/cst['S_0']
-    cst['t']           = np.array([cst['t_0']+i*deltaT for i in range(set_size)])
-    cst['tau']         = [cst['tau_0']*np.exp(-cst['mu']*max(cst['t'][i]-cst['N'],0)) for i in range(set_size)]
-    
-
-    return cst
 
 def init_random_date(start_time,end_time,integer = True,first_date ='2020-01-25'):
     first_date = np.datetime64(first_date)
@@ -75,55 +46,81 @@ def init_random_date(start_time,end_time,integer = True,first_date ='2020-01-25'
     return random_date + (start_time-first_date).astype(int)
 
 
+def init_variables(deltaT= 0.1,T_MAX= 100, global_constants = global_constants):
+    variables = {}
+    global_constants['deltatT'] = deltaT
+    global_constants['T_MAX']   = T_MAX
+    global_constants['set_size']= int(T_MAX/deltaT)   
+
+    for key,value in cst_range.items() : 
+        variables[key] = np.random.uniform(value[0],value[1])
+    
+    variables['t_0']      = init_random_date(start_time,middle_time)
+    variables['N']        = init_random_date(middle_time,end_time)
+    variables['N_I']      = np.random.randint(8,12)
+    variables['N_H']      = np.random.randint(15,25)
+    variables['N_U']      = np.random.randint(10,20)
+    variables['I_moins_0']= np.random.randint(1,100)
+
+    return variables
+
+variables = init_variables(global_constants=global_constants)
+
+
+def compute_constants(variables,global_constants= global_constants):
+    """
+    This function takes the constants created by the random choice of the constants.
+    """
+    constants = {}
+    constants['gamma_IR']    = (variables['p_a'] + (1-variables['p_a'])*(1-variables['p_IH']-variables['p_IU']))/variables['N_I']
+    constants['gamma_IH']    = (1-variables['p_a'])*variables['p_IH']/variables['N_I']
+    constants['gamma_IU']    = (1-variables['p_a'])*variables['p_IU']/variables['N_I']
+    constants['gamma_HD']    = variables['p_HD']/variables['N_H']
+    constants['gamma_HU']    = variables['p_HU']/variables['N_H']
+    constants['gamma_HR']    = (1-variables['p_HD']-variables['p_HU'])/variables['N_H']
+    constants['gamma_UD']    = variables['p_UD']/variables['N_U']
+    constants['gamma_UR']    = (1-variables['p_UD'])/variables['N_U']
+    constants['tau_0']       = variables['R_0']*(variables['lambda_1']+constants['gamma_IR'] + constants['gamma_IH'] + constants['gamma_IU'])/global_constants['S_0']
+    constants['t']           = np.array([variables['t_0']+i*global_constants['deltaT'] for i in range(global_constants['set_size'])])
+    constants['tau']         = [constants['tau_0']*np.exp(-variables['mu']*max(constants['t'][i]-variables['N'],0)) for i in range(global_constants['set_size'])]
+
+    return constants
+
+constants = compute_constants(variables= variables, global_constants=global_constants)
+
+def merge_two_dicts(x, y):
+    z = x.copy()   # start with x's keys and values
+    z.update(y)    # modifies z with y's keys and values & returns None
+    return z
+
+def merge_parameters(constants = constants,variables = variables, global_constants = global_constants):
+    all_parameters = merge_two_dicts(variables,constants) 
+    all_parameters = merge_two_dicts(all_parameters,global_constants)
+    return all_parameters
+
+def init_all_parameters(global_constants=global_constants):
+    variables = init_variables(global_constants=global_constants)
+    constants = compute_constants(variables= variables,global_constants= global_constants)
+    return merge_parameters(constants = constants,variables = variables, global_constants = global_constants)
+
+
+
+
+variables_keys = list(variables.keys())
+constants_keys = list(constants.keys())
+
+
 # We define constants
-init_constant() 
 
-
-S_0         = cst['S_0']
-p_a         = cst['p_a']
-p_IH        = cst['p_IH']
-p_IU        = cst['p_IU']
-p_HD        = cst['p_HD']
-p_HU        = cst['p_HU']
-p_UD        = cst['p_UD']
-N_I         = cst['N_I']
-N_H         = cst['N_H']
-N_U         = cst['N_U']
-R_0         = cst['R_0']
-mu          = cst['mu']
-I_moins_0   = cst['I_moins_0']
-lambda_1    = cst['lambda_1']
-lambda_2    = cst['lambda_2']
-N           = cst['N']
-t_0         = cst['t_0']
-
-gamma_IR    = cst['gamma_IR']
-gamma_IH    = cst['gamma_IH']
-gamma_IU    = cst['gamma_IU']
-gamma_HD    = cst['gamma_HD']
-gamma_HU    = cst['gamma_HU']
-gamma_HR    = cst['gamma_HR']
-gamma_UD    = cst['gamma_UD']
-gamma_UR    = cst['gamma_UR']
-tau_0       = cst['tau_0']
-
-
-t           = cst['t']
-tau         = cst['tau']
+all_parameters = init_all_parameters(global_constants=global_constants)
 
 
 
 
 
-# matrix_coordinates  = {
-#     'S':0,
-#     'I_moins':1,
-#     'I_plus':2,
-#     R_moins:3,
-#     R_plus_I:4,
-#     H:5,
-#     U:6,
-#     R_plus_H:7,
-#     D:8,
-#     D_R:9
-# }
+
+
+
+# Pandas short-cut
+
+jour = 'jour'

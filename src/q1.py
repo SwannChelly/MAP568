@@ -9,7 +9,6 @@ from pylab import *
 from scipy.integrate import odeint # Module de résolution des équations différentielles
 
 
-from constant import *
 
 
 
