@@ -116,7 +116,8 @@ all_parameters = init_all_parameters(global_constants=global_constants)
 
 
 
-
+n_DR = 30
+n_H  = 52
 
 
 
