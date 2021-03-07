@@ -1,5 +1,9 @@
 # Constant file containing what we need for the project ####
 import numpy as np 
+from scipy.stats import lognorm
+from scipy.stats import norm 
+from scipy.stats import halfcauchy
+
 
 
 # np.random.seed(1234)
@@ -11,7 +15,7 @@ end_time    = '2020-03-15'
 
 
 
-global_constants = {'deltaT':0.1,
+global_constants = {'deltaT':0.01,
 'T_MAX': 100, 
 'S_0': 67*10**6}
 
@@ -46,7 +50,7 @@ def init_random_date(start_time,end_time,integer = True,first_date ='2020-01-25'
     return random_date + (start_time-first_date).astype(int)
 
 
-def init_variables(deltaT= 0.1,T_MAX= 100, global_constants = global_constants):
+def init_variables(deltaT= 0.01,T_MAX= 100, global_constants = global_constants):
     variables = {}
     global_constants['deltatT'] = deltaT
     global_constants['T_MAX']   = T_MAX
@@ -115,13 +119,51 @@ constants_keys = list(constants.keys())
 all_parameters = init_all_parameters(global_constants=global_constants)
 
 
+# Constant 
 
 n_DR = 30
 n_H  = 52
 
-
-
-
 # Pandas short-cut
 
 jour = 'jour'
+
+
+# Function keys 
+
+F = {'p_a': 'lognorm',
+    'p_IH': 'lognorm',
+    'p_IU': 'lognorm',
+    'p_HD': 'lognorm',
+    'p_HU': 'lognorm',
+    'p_UD': 'lognorm',
+    'N_I' : 'lognorm',
+    'N_H' : 'lognorm',
+    'N_U' : 'lognorm',
+    'R_0' : 'lognorm',
+    'mu'  : 'lognorm',
+    'N'   : 'norm',
+    't_0'   : 'norm',
+    'I_moins_0' : 'lognorm',
+    'lambda_1' : 'lognorm'
+}
+
+F_parameters = {'p_a': {'scale':0.65,'s':0.1},
+    'p_IH': {'scale':0.125,'s':0.1},
+    'p_IU': {'scale':0.025,'s':0.1},
+    'p_HD': {'scale':0.15,'s':0.1},
+    'p_HU': {'scale':0.15,'s':0.1},
+    'p_UD': {'scale':0.3,'s':0.1},
+    'N_I' : {'scale':10,'s':0.1},
+    'N_H' : {'scale':20,'s':0.1},
+    'N_U' : {'scale':15,'s':0.1},
+    'R_0' : {'scale':3.15,'s':0.1},
+    'mu'  : {'scale':0.045,'s':0.1},
+    'N'   : {'loc':40,'scale':1},
+    't_0' : {'loc':15, 'scale':1},
+    'I_moins_0' : {'scale':50,'s':0.1},
+    'lambda_1' : {'scale':0.5*10**(-5),'s':0.1}
+}
+
+
+
