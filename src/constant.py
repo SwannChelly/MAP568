@@ -15,7 +15,7 @@ end_time    = '2020-03-15'
 
 
 
-global_constants = {'deltaT':0.01,
+global_constants = {'deltaT':1,
 'T_MAX': 100, 
 'S_0': 67*10**6}
 
@@ -50,7 +50,7 @@ def init_random_date(start_time,end_time,integer = True,first_date ='2020-01-25'
     return random_date + (start_time-first_date).astype(int)
 
 
-def init_variables(deltaT= 0.01,T_MAX= 100, global_constants = global_constants):
+def init_variables(deltaT= 1,T_MAX= 100, global_constants = global_constants):
     variables = {}
     global_constants['deltatT'] = deltaT
     global_constants['T_MAX']   = T_MAX
@@ -59,8 +59,10 @@ def init_variables(deltaT= 0.01,T_MAX= 100, global_constants = global_constants)
     for key,value in cst_range.items() : 
         variables[key] = np.random.uniform(value[0],value[1])
     
-    variables['t_0']      = init_random_date(start_time,middle_time)
-    variables['N']        = init_random_date(middle_time,end_time)
+    #variables['t_0']      = init_random_date(start_time,middle_time)
+    #variables['N']        = init_random_date(middle_time,end_time)
+    variables['t_0']      = np.random.randint(1,30)
+    variables['N']        = np.random.randint(30,50)
     variables['N_I']      = np.random.randint(8,12)
     variables['N_H']      = np.random.randint(15,25)
     variables['N_U']      = np.random.randint(10,20)
