@@ -52,7 +52,7 @@ def init_random_date(start_time,end_time,integer = True,first_date ='2020-01-25'
 
 def init_variables(deltaT= 1,T_MAX= 100, global_constants = global_constants):
     variables = {}
-    global_constants['deltatT'] = deltaT
+    global_constants['deltaT'] = deltaT
     global_constants['T_MAX']   = T_MAX
     global_constants['set_size']= int(T_MAX/deltaT)   
 
@@ -61,12 +61,12 @@ def init_variables(deltaT= 1,T_MAX= 100, global_constants = global_constants):
     
     #variables['t_0']      = init_random_date(start_time,middle_time)
     #variables['N']        = init_random_date(middle_time,end_time)
-    variables['t_0']      = np.random.randint(1,30)
-    variables['N']        = np.random.randint(30,50)
-    variables['N_I']      = np.random.randint(8,12)
-    variables['N_H']      = np.random.randint(15,25)
-    variables['N_U']      = np.random.randint(10,20)
-    variables['I_moins_0']= np.random.randint(1,100)
+    variables['t_0']      = np.random.randint(1,31)
+    variables['N']        = np.random.randint(30,51)
+    variables['N_I']      = np.random.randint(8,13)
+    variables['N_H']      = np.random.randint(15,26)
+    variables['N_U']      = np.random.randint(10,21)
+    variables['I_moins_0']= np.random.randint(1,101)
 
     return variables
 
