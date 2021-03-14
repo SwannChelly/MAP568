@@ -54,7 +54,7 @@ def init_variables(deltaT= 1,T_MAX= 100, global_constants = global_constants):
     variables = {}
     global_constants['deltaT'] = deltaT
     global_constants['T_MAX']   = T_MAX
-    global_constants['set_size']= int(T_MAX/deltaT)   
+    global_constants['set_size']= int(T_MAX/deltaT)  
 
     for key,value in cst_range.items() : 
         variables[key] = np.random.uniform(value[0],value[1])
