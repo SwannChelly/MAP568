@@ -87,7 +87,7 @@ def compute_constants(variables,global_constants= global_constants):
     constants['gamma_UD']    = variables['p_UD']/variables['N_U']
     constants['gamma_UR']    = (1-variables['p_UD'])/variables['N_U']
     constants['tau_0']       = variables['R_0']*(variables['lambda_1']+constants['gamma_IR'] + constants['gamma_IH'] + constants['gamma_IU'])/global_constants['S_0']
-    constants['t']           = np.arange(variables['t_0'],variables['t_0']+global_constants['set_size'],global_constants['deltaT'])
+    constants['t']           = np.arange(int(variables['t_0']),int(variables['t_0'])+global_constants['set_size'],global_constants['deltaT'])
     constants['tau']         = constants['tau_0']*np.exp(-variables['mu']*np.maximum(constants['t']-variables['N'],0))
 
     return constants
