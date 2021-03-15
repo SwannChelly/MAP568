@@ -58,9 +58,7 @@ def init_variables(deltaT= 1,T_MAX= 100, global_constants = global_constants):
 
     for key,value in cst_range.items() : 
         variables[key] = np.random.uniform(value[0],value[1])
-    
-    #variables['t_0']      = init_random_date(start_time,middle_time)
-    #variables['N']        = init_random_date(middle_time,end_time)
+        
     variables['t_0']      = np.random.randint(1,31)
     variables['N']        = np.random.randint(30,51)
     variables['N_I']      = np.random.randint(8,13)
