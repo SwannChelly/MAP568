@@ -166,4 +166,21 @@ F_parameters = {'p_a': {'scale':0.65,'s':0.1},
 }
 
 
+bounds = {'p_a': {'low':0.4,'high':0.9},
+    'p_IH': {'low':0.05,'high':0.2},
+    'p_IU': {'low':0.01,'high':0.04},
+    'p_HD': {'low':0.1,'high':0.2},
+    'p_HU': {'low':0.1,'high':0.2},
+    'p_UD': {'low':0.2,'high':0.4},
+    'N_I' : {'low':8,'high':12},
+    'N_H' : {'low':15,'high':25},
+    'N_U' : {'low':10,'high':20},
+    'R_0' : {'low':2.9,'high':3.4},
+    'mu'  : {'low':0.01,'high':0.08},
+    'N'   : {'low':30,'high':50},
+    't_0' : {'low':1, 'high':30},
+    'I_moins_0' : {'low':1,'high':10},
+    'lambda_1' : {'low':10**(-4),'high':10**(-3)}
+}
+
 
