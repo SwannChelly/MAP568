@@ -1,0 +1,9 @@
+Auteurs : 
+
+- Maxime VINCENT 
+- Swann CHELLY 
+
+-----------------
+
+
+Le projet est dans "Project", il nécessite les données que nous avons et les fichiers à la racine du projet.
