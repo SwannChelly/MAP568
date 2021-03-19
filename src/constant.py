@@ -114,6 +114,7 @@ def init_all_parameters(global_constants=global_constants):
 
 
 variables_keys = list(variables.keys())
+variables_fb_keys = variables_keys + ['sigma_DR','sigma_H','sigma_U','sigma_D','sigma_R']
 constants_keys = list(constants.keys())
 
 
@@ -151,21 +152,21 @@ F = {'p_a': 'lognorm',
     'lambda_1' : 'lognorm'
 }
 
-F_parameters = {'p_a': {'scale':0.65,'s':0.1},
-    'p_IH': {'scale':0.125,'s':0.1},
-    'p_IU': {'scale':0.025,'s':0.1},
-    'p_HD': {'scale':0.15,'s':0.1},
-    'p_HU': {'scale':0.15,'s':0.1},
-    'p_UD': {'scale':0.3,'s':0.1},
-    'N_I' : {'scale':10,'s':0.1},
-    'N_H' : {'scale':20,'s':0.1},
-    'N_U' : {'scale':15,'s':0.1},
-    'R_0' : {'scale':3.15,'s':0.1},
-    'mu'  : {'scale':0.045,'s':0.1},
+F_parameters_plug_in = {'p_a': {'loc':0.65,'scale':0.1},
+    'p_IH': {'loc':0.125,'scale':0.1},
+    'p_IU': {'loc':0.025,'scale':0.1},
+    'p_HD': {'loc':0.15,'scale':0.1},
+    'p_HU': {'loc':0.15,'scale':0.1},
+    'p_UD': {'loc':0.3,'scale':0.1},
+    'N_I' : {'loc':10,'scale':1},
+    'N_H' : {'loc':20,'scale':1},
+    'N_U' : {'loc':15,'scale':1},
+    'R_0' : {'loc':3.15,'scale':1},
+    'mu'  : {'loc':0.05,'scale':0.1},
     'N'   : {'loc':40,'scale':1},
     't_0' : {'loc':15, 'scale':1},
-    'I_moins_0' : {'scale':50,'s':0.1},
-    'lambda_1' : {'scale':0.5*10**(-5),'s':0.1}
+    'I_moins_0' : {'loc':50,'scale':1},
+    'lambda_1' : {'loc':0.5*10**(-4),'scale':10**(-5)}
 }
 
 
@@ -184,5 +185,7 @@ bounds = {'p_a': {'low':0.4,'high':0.9},
     'N'   : {'low':30,'high':50},
     't_0' : {'low':1, 'high':30},
     'I_moins_0' : {'low':1,'high':100},
-    'lambda_1' : {'low':10**(-4),'high':10**(-3)}
+    'lambda_1' : {'low':10**(-4),'high':10**(-3)},
+    'sigma_DR':{'low':0,'high':100},'sigma_H':{'low':0,'high':100},'sigma_U':{'low':0,'high':100},'sigma_D':{'low':0,'high':100},'sigma_R':{'low':0,'high':100}
 }
+
