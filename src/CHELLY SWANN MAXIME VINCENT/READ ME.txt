@@ -7,3 +7,5 @@ Auteurs :
 
 
 Le projet est dans "Project", il nécessite les données que nous avons et les fichiers à la racine du projet.
+
+Pour rendre l'expérience plus agréable, je vous conseille d'installer le module progressbar : pip3 install progressbar
